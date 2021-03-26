@@ -28,20 +28,20 @@ db.once('open', () => {
 
 const reviews_photos = new mongoose.Schema({
   id: Number,
-  review_id: Number,
+  review_id: {type: Number, index: true},
   url: String
 }, {collection: 'reviews_photos'});
 
 const characteristics = new mongoose.Schema({
   id: {type: Number,  index: true},
-  product_id: Number,
+  product_id: {type: Number, index: true},
   name: String,
 }, {collection: 'characteristics'});
 
 const characteristic_reviews = new mongoose.Schema({
   id: Number,
-  characteristic_id: Number,
-  review_id: Number,
+  characteristic_id: {type: Number, index: true},
+  review_id: {type: Number, index: true},
   value: Number,
 }, {collection: 'characteristic_reviews'});
 
@@ -58,7 +58,6 @@ const reviews = new mongoose.Schema({
   reviewer_email: String,
   response: String,
   helpfulness: Number,
-
 }, {collection: 'reviews'});
 
 const reviewsModel = mongoose.model('review', reviews);
@@ -88,9 +87,11 @@ app.get('/api/reviews/:product_id', (req, res) => {
   // })
   // .populate('characteristics') // add to query chain below if needed
 
-  reviewsModel.find({product_id: req.params.product_id})
 
+  reviewsModel.find({product_id: req.params.product_id})
+    .lean()
     .populate('photos')
+
     .exec((err, data) => {
       if (err) {
         console.log(err)
@@ -100,7 +101,7 @@ app.get('/api/reviews/:product_id', (req, res) => {
       }
     })
 })
-// add review // testing out different query types, like the other ones better though...
+// add review
 app.put('/api/reviews', (req, res) => {
   reviewsModel.create(req.query)
     .then((data) => {
