@@ -68,7 +68,7 @@ const photosModel = mongoose.model('reviews_photos', reviews_photos);
 
 // Loader.io testing endpoint
 app.get('/loaderio-c5a8f642e3dfc65b3d316faee4e7b3e0', (req, res) => {
-    res.status(200).sendFile('./loaderio-c5a8f642e3dfc65b3d316faee4e7b3e0.txt');
+    res.status(200).send('loaderio-c5a8f642e3dfc65b3d316faee4e7b3e0');
 })
 
 // get all reviews for a given product
