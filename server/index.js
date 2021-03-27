@@ -66,8 +66,8 @@ const charsRevModel = mongoose.model('characteristic_reviews', characteristic_re
 const photosModel = mongoose.model('reviews_photos', reviews_photos);
 
 // Loader.io testing endpoint
-app.get('/loaderio-86ee5e47dd288d4149ac1de15730a36f', (req, res) => {
-    res.status(200).send('loaderio-86ee5e47dd288d4149ac1de15730a36f');
+app.get('/loaderio-d6fae1b95d9653579b1b47e7d777f35a', (req, res) => {
+    res.status(200).send('loaderio-d6fae1b95d9653579b1b47e7d777f35a');
 })
 
 // get all reviews for a given product
